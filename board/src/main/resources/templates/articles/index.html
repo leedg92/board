@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+</head>
+
+<body>
+<!--header-->
+<header>
+    header 삽입부
+    <hr>
+</header>
+<!--header-->
+<!--main-->
+<main>
+    <form>
+        <label for="search-type" hidden>유형</label>
+            <select id="search-type" name="search-type">
+                <option>제목</option>
+                <option>본문</option>
+                <option>ID</option>
+                <option>닉네임</option>
+                <option>해시태그</option>
+            </select>
+        <label for="search-value" hidden></label>
+        <input type="search" placeholder="검색어" id="search-value" name="search-value">
+        <button type="submit">검색</button>
+
+    </form>
+<!--테이블-->
+    <table>
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>해시태그</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>첫글</td>
+                <td>#java</td>
+                <td>leedg92</td>
+                <td>2023-01-08</td>
+            </tr>
+            <tr>
+                <td>두번째글</td>
+                <td>#python</td>
+                <td>leedg92</td>
+                <td>2023-01-08</td>
+            </tr>
+            <tr>
+                <td>세번째글</td>
+                <td>#kotlin</td>
+                <td>leedg92</td>
+                <td>2023-01-08</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+<!--테이블-->
+<!--    네비게이션바-->
+    <nav>
+        <table>
+            <tr>
+                <td>이전</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>다음</td>
+            </tr>
+        </table>
+    </nav>
+<!--    네비게이션바-->
+</main>
+<!--main-->
+
+<!--footer-->
+<footer>
+    <hr>
+    footer 삽입부
+</footer>
+<!--footer-->
+</body>
+
+</html>
