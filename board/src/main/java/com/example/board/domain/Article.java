@@ -1,7 +1,5 @@
 package com.example.board.domain;
 
-import com.example.board.domain.ArticleComment;
-import com.example.board.domain.AuditingFields;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
