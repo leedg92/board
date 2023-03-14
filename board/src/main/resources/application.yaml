@@ -17,9 +17,9 @@ spring:
     username: leedg92
     password: '@dlehd2231'
     driver-class-name: com.mysql.cj.jdbc.Driver
-    datasource:
-      initialization-mode=always: always
-
+  sql:
+    init:
+      mode: always
   #    url: jdbc:h2:mem:testdb
 #    username: sa
 #    driver-class-name: org.h2.Driver
