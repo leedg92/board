@@ -13,6 +13,9 @@ public class JpaConfig {
 
     @Bean
     public AuditorAware<String> auditorAware() {
-        return () -> Optional.of("leedg92");    //TODO: 시큐리티 인증기능 추가되면 수정하기!
+
+//        return () -> Optional.of("leedg92");    //TODO: 시큐리티 인증기능 추가되면 수정하기!
+        return null;
     }
+
 }
