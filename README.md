@@ -21,3 +21,5 @@
 
 
 equals and hashcode를 overriding한 이유는 엔티티의 모든 필드를 비교할 필요가 없기때문에 id만 비교하기 위해서임(퍼포먼스의 차이).
+spring data jpa의 쿼리메소드는 도메인단위로 출력을 만들어준다.
+-> 스트링형태로 받기 위해 queryDSL을 사용
