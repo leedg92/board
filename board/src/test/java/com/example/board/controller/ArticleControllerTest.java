@@ -64,7 +64,7 @@ class ArticleControllerTest {
         given(paginationService.getPaginationBarNumbers(anyInt(), anyInt())).willReturn(List.of(0, 1, 2, 3, 4));
 
         // When & Then
-        mvc.perform(get("/articles"))
+        mvc.perform(get("/comments"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/index"))
@@ -86,7 +86,7 @@ class ArticleControllerTest {
 
         // When & Then
         mvc.perform(
-                        get("/articles")
+                        get("/comments")
                                 .queryParam("searchType", searchType.name())
                                 .queryParam("searchValue", searchValue)
                 )
@@ -114,7 +114,7 @@ class ArticleControllerTest {
 
         // When & Then
         mvc.perform(
-                        get("/articles")
+                        get("/comments")
                                 .queryParam("page", String.valueOf(pageNumber))
                                 .queryParam("size", String.valueOf(pageSize))
                                 .queryParam("sort", sortName + "," + direction)
@@ -138,7 +138,7 @@ class ArticleControllerTest {
         given(articleService.getArticleCount()).willReturn(totalCount);
 
         // When & Then
-        mvc.perform(get("/articles/" + articleId))
+        mvc.perform(get("/comments/" + articleId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/detail"))
@@ -157,7 +157,7 @@ class ArticleControllerTest {
         // Given
 
         // When & Then
-        mvc.perform(get("/articles/search"))
+        mvc.perform(get("/comments/search"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/search"));
@@ -173,7 +173,7 @@ class ArticleControllerTest {
         given(paginationService.getPaginationBarNumbers(anyInt(), anyInt())).willReturn(List.of(1, 2, 3, 4, 5));
 
         // When & Then
-        mvc.perform(get("/articles/search-hashtag"))
+        mvc.perform(get("/comments/search-hashtag"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/search-hashtag"))
@@ -198,7 +198,7 @@ class ArticleControllerTest {
 
         // When & Then
         mvc.perform(
-                        get("/articles/search-hashtag")
+                        get("/comments/search-hashtag")
                                 .queryParam("searchValue", hashtag)
                 )
                 .andExpect(status().isOk())
@@ -219,7 +219,7 @@ class ArticleControllerTest {
         // Given
 
         // When & Then
-        mvc.perform(get("/articles/form"))
+        mvc.perform(get("/comments/form"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/form"))
@@ -235,7 +235,7 @@ class ArticleControllerTest {
 
         // When & Then
         mvc.perform(
-                        post("/articles/form")
+                        post("/comments/form")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .content(formDataEncoder.encode(articleRequest))
                                 .with(csrf())
@@ -255,7 +255,7 @@ class ArticleControllerTest {
         given(articleService.getArticle(articleId)).willReturn(dto);
 
         // When & Then
-        mvc.perform(get("/articles/" + articleId + "/form"))
+        mvc.perform(get("/comments/" + articleId + "/form"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/form"))
@@ -274,7 +274,7 @@ class ArticleControllerTest {
 
         // When & Then
         mvc.perform(
-                        post("/articles/" + articleId + "/form")
+                        post("/comments/" + articleId + "/form")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .content(formDataEncoder.encode(articleRequest))
                                 .with(csrf())
@@ -294,7 +294,7 @@ class ArticleControllerTest {
 
         // When & Then
         mvc.perform(
-                        post("/articles/" + articleId + "/delete")
+                        post("/comments/" + articleId + "/delete")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .with(csrf())
                 )
