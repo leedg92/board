@@ -4,8 +4,9 @@ package com.example.board.domain.constant;
 import lombok.Getter;
 
 public enum FormStatus {
-    CREATE("저장", false),
-    UPDATE("수정", true);
+    ACREATE("게시글 저장", false),
+    AUPDATE("게시글 수정", true),
+    CUPDATE("댓글 수정", true);
 
     @Getter private final String description;
     @Getter private final Boolean update;

@@ -45,6 +45,11 @@ public class ArticleCommentService {
         }
 
     }
+    public ArticleCommentDto getArticleComment(Long commentId) {
+        return articleCommentRepository.findById(commentId)
+                .map(ArticleCommentDto::from)
+                .orElseThrow(() -> new EntityNotFoundException("댓글이 없습니다 - commentId : " + commentId));
+    }
 
     public void updateArticleComment(ArticleCommentDto dto) {
 
@@ -55,5 +60,6 @@ public class ArticleCommentService {
     public void deleteArticleComment(Long articleCommentId) {
         articleCommentRepository.deleteById(articleCommentId);
     }
+
 
 }

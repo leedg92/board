@@ -75,7 +75,7 @@ public class ArticleController {
 
     @GetMapping("/form")
     public String articleForm(ModelMap map) {
-        map.addAttribute("formStatus", FormStatus.CREATE);
+        map.addAttribute("formStatus", FormStatus.ACREATE);
 
         return "articles/form";
     }
@@ -95,7 +95,7 @@ public class ArticleController {
         ArticleResponse article = ArticleResponse.from(articleService.getArticle(articleId));
 
         map.addAttribute("article", article);
-        map.addAttribute("formStatus", FormStatus.UPDATE);
+        map.addAttribute("formStatus", FormStatus.AUPDATE);
 
         return "articles/form";
     }
