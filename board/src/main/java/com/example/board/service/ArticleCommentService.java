@@ -4,6 +4,7 @@ import com.example.board.domain.Article;
 import com.example.board.domain.ArticleComment;
 import com.example.board.domain.UserAccount;
 import com.example.board.dto.ArticleCommentDto;
+import com.example.board.dto.UserAccountDto;
 import com.example.board.repository.ArticleCommentRepository;
 import com.example.board.repository.ArticleRepository;
 import com.example.board.repository.UserAccountRepository;
@@ -54,11 +55,16 @@ public class ArticleCommentService {
     public void updateArticleComment(ArticleCommentDto dto) {
 
         ArticleComment articleComment = articleCommentRepository.getReferenceById(dto.id());
-        articleComment.setContent(dto.content());
+        UserAccount userAccount = userAccountRepository.getReferenceById(dto.userAccountDto().userId());
+        if (articleComment.getUserAccount().equals(userAccount)) {
+            if (dto.content() != null) {
+                articleComment.setContent(dto.content());
+            }
+        }
     }
 
-    public void deleteArticleComment(Long articleCommentId) {
-        articleCommentRepository.deleteById(articleCommentId);
+    public void deleteArticleComment(Long articleCommentId, String userId) {
+        articleCommentRepository.deleteByIdAndUserAccount_UserId(articleCommentId, userId);
     }
 
 
