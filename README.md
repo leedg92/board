@@ -1,6 +1,32 @@
 # board
 연습용 개인 게시판 프로젝트
 
+
+><h3>개발 환경</h3>
+>- Intellij IDEA Ultimate <br>
+>- Java 17 <br>
+>- Gradle 7.6.1 <br>
+>- Spring Boot 2.7.0(queryDSL 의존성 추가 방식이 3.0버전 이후로 변경 - 추후 spring boot 버전 변경 예정) <br>
+
+><h3>기술 세부 스택</h3>
+> <h4>Spring Boot Actuator</h4>
+>- Spring Web <br>
+>- Spring Data JPA <br>
+>- Rest Repositories <br>
+>- Rest Repositories HAL Explorer <br>
+>- Thymeleaf <br>
+>- Spring Security <br>
+>- H2 Database <br>
+> MySQL Driver <br>
+>- Lombok <br>
+>- Spring Boot DevTools <br>
+>- Spring Configuration Processor <br>
+> <h4>그 외</h4>
+> QueryDSL <br>
+> Bootstrap<br>
+
+<br><br><br>
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 >목표
 >- java 기반 웹페이지를 처음부터 빌드해보기
 >- SM 업무하면서 사용했던 방식(옛날?)이 아닌 다른 방식으로 개발
