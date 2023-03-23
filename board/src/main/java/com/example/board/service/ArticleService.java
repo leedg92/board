@@ -57,7 +57,9 @@ public class ArticleService {
 
     public void saveArticle(ArticleDto dto) {
         System.out.println("asdsd ::: " + dto);
+
         UserAccount userAccount = userAccountRepository.getReferenceById(dto.userAccountDto().userId());
+        System.out.println("asdsd ::: " + userAccount);
         articleRepository.save(dto.toEntity(userAccount));
     }
 

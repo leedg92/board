@@ -34,4 +34,6 @@ public class AuthControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
+
+
 }

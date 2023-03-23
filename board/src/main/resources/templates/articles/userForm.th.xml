@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#header" th:replace="header :: header" />
+    <attr sel="#footer" th:replace="footer :: footer" />
+
+    <attr sel="#user-form" th:action="'/users/userForm'" th:method="post">
+        <attr sel="#userId"   />
+        <attr sel="#userPassword"/>
+        <attr sel="#nickname"/>
+        <attr sel="#email"/>
+        <attr sel="#memo"/>
+<!--        <attr sel="#createdAt" th:datetime="${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}" th:value="${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}"/>-->
+<!--        <attr sel="#createdBy" />-->
+<!--        <attr sel="#modifiedAt" th:datetime="${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}" th:value="${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}"/>-->
+<!--        <attr sel="#modifiedBy" />-->
+        <attr sel="#submit-button" />
+    </attr>
+</thlogic>

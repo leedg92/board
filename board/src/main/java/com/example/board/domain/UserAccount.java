@@ -39,7 +39,7 @@ public class UserAccount extends AuditingFields {
     }
 
     public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
-        return new UserAccount(userId, userPassword, email, nickname, memo);
+        return new UserAccount(userId, "{noop}" + userPassword, email, nickname, memo);
     }
 
     @Override

@@ -26,14 +26,22 @@ public class SecurityConfig {
                                 HttpMethod.GET,
                                 "/",
                                 "/articles",
-                                "/articles/search-hashtag"
+                                "/articles/search-hashtag",
+                                "/users/userForm"
                         ).permitAll()
+                        .mvcMatchers(
+                                HttpMethod.POST,
+                                "/users/userForm"
+                        )
+                        .permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin()
                 .and()
                 .logout()
                 .logoutSuccessUrl("/");
+
+
 
         return http.build();
     }
