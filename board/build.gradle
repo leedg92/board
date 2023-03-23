@@ -18,7 +18,9 @@ repositories {
     mavenCentral()
 }
 
-
+manifest {
+    attributes 'Main-Class': 'com.example.board'
+}
 
 
 dependencies {
