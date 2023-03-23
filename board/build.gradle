@@ -19,7 +19,8 @@ repositories {
 }
 
 tasks.jar {
-    manifest.attributes["Main-Class"] = "com.example.board"
+    manifest.attributes["Main-Class"] = "com.example.board.BoardApplication"
+    enabled = false
 }
 
 
