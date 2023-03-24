@@ -17,6 +17,7 @@ spring:
 #    url: jdbc:mysql://localhost:3306/board
 #    username: leedg92
 #    password: '@dlehd2231'
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 ###Qoddi
     url: ${MYSQL_URL}
     username: ${DATABASE_USERNAME}
