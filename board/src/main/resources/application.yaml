@@ -18,9 +18,9 @@ spring:
 #    username: leedg92
 #    password: '@dlehd2231'
 ###Qoddi
-    url: mysql://board-user:gdTwko9Gj7U8@srv-captain--pwcgodbxlm-mysql-80x:3306/board-database
-    username: board-user
-    password: gdTwko9Gj7U8
+    url: ${MYSQL_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 
