@@ -19,7 +19,7 @@ spring:
 #    password: '@dlehd2231'
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 ###Qoddi
-    url: ${DATABASE_HOST}
+    url: ${MYSQL_URL}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
