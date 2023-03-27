@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Service
 public class HashtagService {
-    public Object parseHashtagNames(String content) {
+    public Set<String> parseHashtagNames(String content) {
         return null;
     }
 
