@@ -6,7 +6,7 @@
     <attr sel="main" th:object="${articles}">
         <attr sel="#hashtags" th:remove="all-but-first">
             <attr sel="div" th:each="hashtag : ${hashtags}">
-                <attr sel="a" th:class="'text-reset'" th:text="${hashtag}" th:href="@{/articles/search-hashtag(
+                <attr sel="a" th:class="'text-reset'" th:text="'#'+${hashtag}" th:href="@{/articles/search-hashtag(
             page=${param.page},
             sort=${param.sort},
             searchType=${searchType.name},
