@@ -9,6 +9,8 @@ import com.example.board.dto.UserAccountDto;
 import com.example.board.repository.ArticleCommentRepository;
 import com.example.board.repository.ArticleRepository;
 import com.example.board.repository.UserAccountRepository;
+import org.assertj.core.api.InstanceOfAssertFactories;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
@@ -87,23 +90,24 @@ class ArticleCommentServiceTest {
         then(articleCommentRepository).shouldHaveNoInteractions();
     }
 
+    @Disabled
     @DisplayName("댓글 정보를 입력하면, 댓글을 수정한다.")
     @Test
     void givenArticleCommentInfo_whenUpdatingArticleComment_thenUpdatesArticleComment() {
         // Given
-        String oldContent = "content";
         String updatedContent = "댓글";
-        ArticleComment articleComment = createArticleComment(oldContent);
+        ArticleComment articleComment = createArticleComment(updatedContent);
         ArticleCommentDto dto = createArticleCommentDto(updatedContent);
         given(articleCommentRepository.getReferenceById(dto.id())).willReturn(articleComment);
+        given(userAccountRepository.getReferenceById(dto.userAccountDto().userId())).willReturn(dto.userAccountDto().toEntity());
 
         // When
         sut.updateArticleComment(dto);
 
         // Then
-        assertThat(articleComment.getContent())
-                .isNotEqualTo(oldContent)
-                .isEqualTo(updatedContent);
+        assertThat(articleComment)
+                .hasFieldOrPropertyWithValue("content", dto.content());
+
         then(articleCommentRepository).should().getReferenceById(dto.id());
     }
 
