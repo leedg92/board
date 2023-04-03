@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
@@ -43,7 +44,7 @@ class ArticleCommentServiceTest {
     void givenArticleId_whenSearchingArticleComments_thenReturnsArticleComments() {
         // Given
         Long articleId = 1L;
-        ArticleComment expected = createArticleComment("content");
+        ArticleComment expected = createArticleComment(1L,"content");
         given(articleCommentRepository.findByArticle_Id(articleId)).willReturn(List.of(expected));
 
         // When
@@ -96,7 +97,7 @@ class ArticleCommentServiceTest {
     void givenArticleCommentInfo_whenUpdatingArticleComment_thenUpdatesArticleComment() {
         // Given
         String updatedContent = "댓글";
-        ArticleComment articleComment = createArticleComment(updatedContent);
+        ArticleComment articleComment = createArticleComment(1L,updatedContent);
         ArticleCommentDto dto = createArticleCommentDto(updatedContent);
         given(articleCommentRepository.getReferenceById(dto.id())).willReturn(articleComment);
         given(userAccountRepository.getReferenceById(dto.userAccountDto().userId())).willReturn(dto.userAccountDto().toEntity());
@@ -142,10 +143,19 @@ class ArticleCommentServiceTest {
 
 
     private ArticleCommentDto createArticleCommentDto(String content) {
+        return createArticleCommentDto(null, content);
+    }
+
+    private ArticleCommentDto createArticleCommentDto(Long parentCommentId, String content) {
+        return createArticleCommentDto(1L, parentCommentId, content);
+    }
+
+    private ArticleCommentDto createArticleCommentDto(Long id, Long parentCommentId, String content) {
         return ArticleCommentDto.of(
-                1L,
+                id,
                 1L,
                 createUserAccountDto(),
+                parentCommentId,
                 content,
                 LocalDateTime.now(),
                 "uno",
@@ -153,7 +163,6 @@ class ArticleCommentServiceTest {
                 "uno"
         );
     }
-
 
     private UserAccountDto createUserAccountDto() {
         return UserAccountDto.of(
@@ -169,12 +178,15 @@ class ArticleCommentServiceTest {
         );
     }
 
-    private ArticleComment createArticleComment(String content) {
-        return ArticleComment.of(
+    private ArticleComment createArticleComment(Long id, String content) {
+        ArticleComment articleComment = ArticleComment.of(
                 createArticle(),
                 createUserAccount(),
                 content
         );
+        ReflectionTestUtils.setField(articleComment, "id", id);
+
+        return articleComment;
     }
 
     private UserAccount createUserAccount() {
@@ -187,13 +199,13 @@ class ArticleCommentServiceTest {
         );
     }
 
-
     private Article createArticle() {
         Article article = Article.of(
                 createUserAccount(),
                 "title",
                 "content"
         );
+        ReflectionTestUtils.setField(article, "id", 1L);
         article.addHashtags(Set.of(createHashtag(article)));
 
         return article;
