@@ -25,6 +25,7 @@ public record ArticleCommentRequest(Long commentId,
 
     public ArticleCommentDto toDto(UserAccountDto userAccountDto){
         return ArticleCommentDto.of(
+                commentId,
                 articleId,
                 userAccountDto,
                 parentCommentId,
