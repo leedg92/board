@@ -16,10 +16,19 @@ public class UserAccountService {
     private final UserAccountRepository userAccountRepository;
 
 
-    public void saveUserAccount(UserAccountDto dto) {
-        System.out.println("통과하니?");
-        System.out.println(dto.toEntity());
+    public String saveUserAccount(UserAccountDto dto) {
 
-        userAccountRepository.save(dto.toEntity());
+        boolean isUser = isUser(dto.userId());
+        if(isUser == false){
+            userAccountRepository.save(dto.toJoinEntity());
+            return "가입에 성공하였습니다.";
+        }else{
+            return "이미 가입된 아이디입니다.";
+        }
+    }
+
+    public boolean isUser(String userId){
+        System.out.println("in isUser ::: " + userAccountRepository.findById(userId).isPresent());
+        return userAccountRepository.findById(userId).isPresent();
     }
 }

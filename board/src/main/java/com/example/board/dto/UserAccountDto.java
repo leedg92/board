@@ -20,6 +20,7 @@ public record UserAccountDto(
     public static UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo) {
         return new UserAccountDto(userId, userPassword, email, nickname, memo, null, null, null, null);
     }
+
     public static UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
         return new UserAccountDto(userId, userPassword, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
@@ -45,6 +46,17 @@ public record UserAccountDto(
                 email,
                 nickname,
                 memo
+        );
+    }
+
+    public UserAccount toJoinEntity() {
+        return UserAccount.of(
+                userId,
+                userPassword,
+                email,
+                nickname,
+                memo,
+                createdBy
         );
     }
 

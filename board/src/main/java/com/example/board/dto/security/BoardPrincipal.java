@@ -5,9 +5,11 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,11 +19,23 @@ public record BoardPrincipal(
         String email,
         String nickname,
         String memo,
+        Collection<? extends GrantedAuthority> authorities,
 //        String AUTHORITY,
-        Collection<? extends GrantedAuthority> authorities
-) implements UserDetails {
+        Map<String,Object> oAuth2Attribute
+) implements UserDetails, OAuth2User {
 
     public static BoardPrincipal of(String username, String password, String email, String nickname, String memo) {
+
+        return of(
+                username,
+                password,
+                email,
+                nickname,
+                memo,
+                null
+        );
+    }
+    public static BoardPrincipal of(String username, String password, String email, String nickname, String memo, Map<String,Object> oAuth2Attribute) {
         Set<RoleType> roleTypes = Set.of(RoleType.USER);
 
         return new BoardPrincipal(
@@ -33,7 +47,8 @@ public record BoardPrincipal(
                 roleTypes.stream()
                         .map(RoleType::getName)
                         .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toUnmodifiableSet())
+                        .collect(Collectors.toUnmodifiableSet()),
+                oAuth2Attribute
         );
     }
 
@@ -78,6 +93,12 @@ public record BoardPrincipal(
     public boolean isCredentialsNonExpired() {return true;}
     @Override
     public boolean isEnabled() {return true;}
+
+
+    @Override
+    public Map<String, Object> getAttributes() {return oAuth2Attribute;}
+    @Override
+    public String getName() {return username;}
 
     public enum RoleType{
         USER("ROLE_TYPE");

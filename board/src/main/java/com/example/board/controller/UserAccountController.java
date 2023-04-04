@@ -29,13 +29,17 @@ public class UserAccountController {
     }
 
     @PostMapping("/userForm")
-    public String postUserJoin(UserAccountDto dto
+    public String postUserJoin(UserAccountDto dto,
+                               ModelMap map
     ) {
         System.out.println("controller 진입?");
         System.out.println(dto);
 
 
-        userAccountService.saveUserAccount(dto);
+        String result = userAccountService.saveUserAccount(dto);
+        System.out.println(result);
+        map.addAttribute("joinResult", result);
+        //TODO : 화면단에 alert 띄우는 것 까지 나중에 구현하기(안해도되나..?)
 
         return "redirect:/articles";
     }
