@@ -34,11 +34,12 @@ public class UserAccountController {
     ) {
         System.out.println("controller 진입?");
         System.out.println(dto);
+        System.out.println(userAccountService.searchUser(dto.userId()));
 
 
-        String result = userAccountService.saveUserAccount(dto);
-        System.out.println(result);
-        map.addAttribute("joinResult", result);
+        BoardPrincipal.from(userAccountService.saveUser(dto.userId(),dto.userPassword(),dto.email(), dto.nickname(),dto.memo()));
+//        System.out.println(result);
+//        map.addAttribute("joinResult", result);
         //TODO : 화면단에 alert 띄우는 것 까지 나중에 구현하기(안해도되나..?)
 
         return "redirect:/articles";

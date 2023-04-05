@@ -49,8 +49,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id: id
-            client-secret: key
+            client-id: 6f9779186537b66d998830728d32879a
+            client-secret: RPBzGTyDNkAtRd2sO5lvCXZv1sGLY7wa
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
             client-authentication-method: POST

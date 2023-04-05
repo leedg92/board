@@ -38,4 +38,7 @@ public abstract class AuditingFields {
     @Column(nullable = false, length = 100)
     protected String modifiedBy; // 수정자
 
+
+
+
 }

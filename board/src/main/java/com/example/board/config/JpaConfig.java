@@ -27,10 +27,11 @@ public class JpaConfig {
 //                .map(BoardPrincipal.class::cast)
 //                .map(BoardPrincipal::getUsername);
 
+
         return () -> {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (Objects.isNull(authentication) || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof BoardPrincipal)) {
-                return Optional.of("anonymous");
+                return Optional.of("admin");
             }
             return Optional.of(authentication.getName());
         };
