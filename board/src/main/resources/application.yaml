@@ -14,9 +14,9 @@ logging:
 spring:
   datasource:
 ###로컬
-    url: jdbc:mysql://localhost:3306/board
-    username: leedg92
-    password: '@dlehd2231'
+    url: ${LOCAL_DB_URL}
+    username: ${LOCAL_DB_USERNAME}
+    password: ${LOCAL_DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 ###cloudType
 #    username: ${DATABASE_USERNAME}
@@ -49,8 +49,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id: 6f9779186537b66d998830728d32879a
-            client-secret: RPBzGTyDNkAtRd2sO5lvCXZv1sGLY7wa
+            client-id: ${KAKAO_OAUTH_CLIENT_ID}
+            client-secret: ${KAKAO_OAUTH_CLIENT_SECRET}
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
             client-authentication-method: POST
