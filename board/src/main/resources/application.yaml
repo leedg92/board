@@ -30,7 +30,10 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
+###로컬
+#      ddl-auto: create
+###cloudType
+      ddl-auto: update
     open-in-view: false
     show-sql: true
     properties:
