@@ -13,12 +13,6 @@ logging:
 
 spring:
   datasource:
-###로컬
-#    url: ${LOCAL_DB_URL}
-#    username: ${LOCAL_DB_USERNAME}
-#    password: ${LOCAL_DB_PASSWORD}
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-###cloudType
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     driver-class-name: org.mariadb.jdbc.Driver
@@ -30,10 +24,7 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-###로컬
-      ddl-auto: create
-###cloudType
-#      ddl-auto: update
+      ddl-auto: update
     open-in-view: false
     show-sql: true
     properties:

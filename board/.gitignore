@@ -5,6 +5,9 @@
 ### test
 *test
 
+### sql
+*.sql
+
 ### Querydsl
 /src/main/generated
 
