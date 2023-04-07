@@ -21,14 +21,14 @@ public class UserAccountController {
 
     private final UserAccountService userAccountService;
 
-    @GetMapping("/userForm")
+    @GetMapping("/userForm/th")
     public String userJoinForm(ModelMap map) {
 //        map.addAttribute("formStatus", FormStatus.ACREATE);
 
         return "articles/userForm";
     }
 
-    @PostMapping("/userForm")
+    @PostMapping("/userForm/th")
     public String postUserJoin(UserAccountDto dto,
                                ModelMap map
     ) {
@@ -42,6 +42,6 @@ public class UserAccountController {
 //        map.addAttribute("joinResult", result);
         //TODO : 화면단에 alert 띄우는 것 까지 나중에 구현하기(안해도되나..?)
 
-        return "redirect:/articles";
+        return "redirect:/articles/th";
     }
 }

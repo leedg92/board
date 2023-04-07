@@ -24,16 +24,16 @@ public class ArticleCommentController {
 
     private final ArticleCommentService articleCommentService;
 
-    @PostMapping("/new")
+    @PostMapping("/new/th")
     public String postNewArticleComment(ArticleCommentRequest articleCommentRequest,
                                         @AuthenticationPrincipal BoardPrincipal boardPrincipal){
         articleCommentService.saveArticleComment(articleCommentRequest.toDto(boardPrincipal.toDto()));
 
 
-        return "redirect:/articles/" + articleCommentRequest.articleId();
+        return "redirect:/articles/" + articleCommentRequest.articleId() + "/th";
     }
 
-    @GetMapping("/{articleId}/{commentId}/form")
+    @GetMapping("/{articleId}/{commentId}/form/th")
     public String updateArticleCommentForm(@PathVariable("articleId") Long articleId,
                                            @PathVariable("commentId") Long commentId,
                                            ModelMap map) {
@@ -49,7 +49,7 @@ public class ArticleCommentController {
         return "articles/commentForm";
     }
 
-    @PostMapping ("/{articleId}/{commentId}/form")
+    @PostMapping ("/{articleId}/{commentId}/form/th")
     public String updateArticleComment(@PathVariable("commentId") Long commentId,
                                        @AuthenticationPrincipal BoardPrincipal boardPrincipal,
                                        ArticleCommentRequest articleCommentRequest) {
@@ -60,15 +60,15 @@ public class ArticleCommentController {
 
         articleCommentService.updateArticleComment(articleCommentRequest.toDto(boardPrincipal.toDto()));
 
-        return "redirect:/articles/" + articleCommentRequest.articleId();
+        return "redirect:/articles/" + articleCommentRequest.articleId() + "/th";
     }
 
-    @PostMapping("/{commentId}/delete")
+    @PostMapping("/{commentId}/delete/th")
     public String deleteArticleComment(@PathVariable Long commentId,
                                        @AuthenticationPrincipal BoardPrincipal boardPrincipal,
                                        Long articleId){
         articleCommentService.deleteArticleComment(commentId, boardPrincipal.getUsername());
 
-        return "redirect:/articles/" + articleId;
+        return "redirect:/articles/" + articleId + "/th";
     }
 }

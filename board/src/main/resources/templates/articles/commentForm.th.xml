@@ -5,7 +5,7 @@
 
     <attr sel="#article-form-header/h1" th:text="${formStatus} ? ${formStatus.description} : _" />
 
-    <attr sel="#article-form" th:action="${formStatus?.update} ? '/comments/' + ${articleId} +'/' + ${articleComment.id} + '/form' : '/articles/form'" th:method="post">
+    <attr sel="#article-form" th:action="${formStatus?.update} ? '/comments/' + ${articleId} +'/' + ${articleComment.id} + '/form/th' : '/articles/form/th'" th:method="post">
         <attr sel="#content" th:text="${articleComment?.content} ?: _" />
         <attr sel="#submit-button" th:text="${formStatus?.description} ?: _" />
         <attr sel="#cancel-button" th:onclick="'history.back()'" />

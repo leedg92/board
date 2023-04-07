@@ -11,27 +11,27 @@
         <attr sel="#hashtag" th:each="hashtag : ${article.hashtags}">
             <attr sel="a"
                   th:text="'#' + ${hashtag}"
-                  th:href="@{/articles(searchType=${searchTypeHashtag},searchValue=${hashtag})}"
+                  th:href="@{/articles/th(searchType=${searchTypeHashtag},searchValue=${hashtag})}"
             />
         </attr>
 
         <attr sel="#article-content/pre" th:text="*{content}" />
 
         <attr sel="#article-buttons" th:if="${#authorization.expression('isAuthenticated()')} and *{userId} == ${#authentication.name}">
-            <attr sel="#delete-article-form" th:action="'/articles/' + *{id} + '/delete'" th:method="post">
-                <attr sel="#update-article" th:href="'/articles/' + *{id} + '/form'" />
+            <attr sel="#delete-article-form" th:action="'/articles/' + *{id} + '/delete/th'" th:method="post">
+                <attr sel="#update-article" th:href="'/articles/' + *{id} + '/form/th'" />
             </attr>
         </attr>
 
         <attr sel=".article-id" th:name="articleId" th:value="*{id}" />
-        <attr sel=".comment-form" th:action="@{/comments/new}" th:method="post">
+        <attr sel=".comment-form" th:action="@{/comments/new/th}" th:method="post">
             <attr sel=".comment-textbox" th:name="content" />
         </attr>
 
         <attr sel="#article-comments" th:remove="all-but-first">
             <attr sel=".parent-comment[0]" th:each="articleComment : ${articleComments}">
-                <attr sel=".comment-delete-form" th:action="'/comments/' + ${articleComment.id} + '/delete'" th:method="post">
-                    <attr sel="#parent-update-comment" th:href="'/comments/'+ *{id} + '/' + ${articleComment.id} + '/form'" />
+                <attr sel=".comment-delete-form" th:action="'/comments/' + ${articleComment.id} + '/delete/th'" th:method="post">
+                    <attr sel="#parent-update-comment" th:href="'/comments/'+ *{id} + '/' + ${articleComment.id} + '/form/th'" />
                     <attr sel="div/strong" th:text="${articleComment.nickname}" />
                     <attr sel="div/small/time" th:datetime="${articleComment.createdAt}" th:text="${#temporals.format(articleComment.createdAt, 'yyyy-MM-dd HH:mm:ss')}" />
                     <attr sel="div/p" th:text="${articleComment.content}" />
@@ -40,8 +40,8 @@
                 </attr>
                 <attr sel="ul" th:if="${!articleComment.childComments.isEmpty}" th:remove="all-but-first">
                     <attr sel=".child-comment[0]" th:each="childComment : ${articleComment.childComments}">
-                        <attr sel=".comment-delete-form" th:action="'/comments/' + ${childComment.id} + '/delete'" th:method="post">
-                            <attr sel="#child-update-comment" th:href="'/comments/'+ *{id} + '/' + ${childComment.id} + '/form'" />
+                        <attr sel=".comment-delete-form" th:action="'/comments/' + ${childComment.id} + '/delete/th'" th:method="post">
+                            <attr sel="#child-update-comment" th:href="'/comments/'+ *{id} + '/' + ${childComment.id} + '/form/th'" />
                             <attr sel="div/strong" th:text="${childComment.nickname}" />
                             <attr sel="div/small/time" th:datetime="${childComment.createdAt}" th:text="${#temporals.format(childComment.createdAt, 'yyyy-MM-dd HH:mm:ss')}" />
                             <attr sel="div/p" th:text="${childComment.content}" />
@@ -57,11 +57,11 @@
         <attr sel="#pagination">
             <attr sel="ul">
                 <attr sel="li[0]/a"
-                      th:href="*{id} - 1 <= 0 ? '#' : |/articles/*{id - 1}|"
+                      th:href="*{id} - 1 <= 0 ? '#' : |/articles/th/*{id - 1}|"
                       th:class="'page-link' + (*{id} - 1 <= 0 ? ' disabled' : '')"
                 />
                 <attr sel="li[1]/a"
-                      th:href="*{id} + 1 > ${totalCount} ? '#' : |/articles/*{id + 1}|"
+                      th:href="*{id} + 1 > ${totalCount} ? '#' : |/articles/th/*{id + 1}|"
                       th:class="'page-link' + (*{id} + 1 > ${totalCount} ? ' disabled' : '')"
                 />
             </attr>
