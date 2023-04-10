@@ -14,15 +14,15 @@ logging:
 spring:
   datasource:
 ###로컬
-    url: ${LOCAL_DB_URL}
-    username: ${LOCAL_DB_USERNAME}
-    password: ${LOCAL_DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: ${LOCAL_DB_URL}
+#    username: ${LOCAL_DB_USERNAME}
+#    password: ${LOCAL_DB_PASSWORD}
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 ###cloudType
-#    username: ${DATABASE_USERNAME}
-#    password: ${DATABASE_PASSWORD}
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    url: jdbc:mariadb://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?useSSL=false
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?useSSL=false
 
   sql:
     init:
@@ -74,7 +74,7 @@ spring:
 
   mvc:
     view:
-      prefix: /WEB-INF/
+      prefix: /WEB-INF/views/
       suffix: .jsp
 
 

@@ -44,4 +44,25 @@ public class UserAccountController {
 
         return "redirect:/articles/th";
     }
+
+
+    @GetMapping("/userForm/jsp")
+    public String jspUserJoinForm(ModelMap map) {
+
+        return "userForm";
+    }
+
+    @PostMapping("/userForm/jsp")
+    public String jspPostUserJoin(UserAccountDto dto,
+                               ModelMap map
+    ) {
+        System.out.println("controller 진입?");
+        System.out.println(dto);
+        System.out.println(userAccountService.searchUser(dto.userId()));
+
+
+        BoardPrincipal.from(userAccountService.saveUser(dto.userId(),dto.userPassword(),dto.email(), dto.nickname(),dto.memo()));
+
+        return "redirect:/articles/jsp";
+    }
 }

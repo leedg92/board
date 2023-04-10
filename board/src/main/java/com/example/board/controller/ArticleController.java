@@ -123,4 +123,105 @@ public class ArticleController {
         return "redirect:/articles/th";
     }
 
+    @GetMapping("/jsp")
+    public String jspArticles(
+            @RequestParam(required = false) SearchType searchType,
+            @RequestParam(required = false) String searchValue,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable,
+            ModelMap map
+    ) {
+        Page<ArticleResponse> articles = articleService.searchArticles(searchType, searchValue, pageable).map(ArticleResponse::from);
+        List<ArticleResponse> articlesList = articles.getContent();
+        System.out.println("aaaaa ::: " + searchType);
+
+        List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), articles.getTotalPages());
+
+        map.addAttribute("test", "hello, world!");
+        map.addAttribute("articles", articles);
+        map.addAttribute("articlesList", articlesList);
+        map.addAttribute("paginationBarNumbers", barNumbers);
+        map.addAttribute("searchTypes", SearchType.values());
+        map.addAttribute("searchType",searchType);
+        map.addAttribute("searchTypeHashtag",SearchType.HASHTAG);
+
+        return "index";
+    }
+
+    @GetMapping("/{articleId}/jsp")
+    public String jspArticle(@PathVariable Long articleId, ModelMap map) {
+        ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(articleService.getArticleWithComments(articleId));
+
+        map.addAttribute("article", article);
+        map.addAttribute("articleComments", article.articleCommentsResponse());
+        map.addAttribute("totalCount", articleService.getArticleCount());
+        map.addAttribute("searchTypeHashtag",SearchType.HASHTAG);
+
+        return "detail";
+    }
+
+    @GetMapping("/search-hashtag/jsp")
+    public String jspSearchArticleHashtag(
+            @RequestParam(required = false) String searchValue,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable,
+            ModelMap map
+    ) {
+        Page<ArticleResponse> articles = articleService.searchArticlesViaHashtag(searchValue, pageable).map(ArticleResponse::from);
+        List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), articles.getTotalPages());
+        List<String> hashtags = articleService.getHashtags();
+
+        map.addAttribute("articles", articles);
+        map.addAttribute("hashtags", hashtags);
+        map.addAttribute("paginationBarNumbers", barNumbers);
+        map.addAttribute("searchType", SearchType.HASHTAG);
+
+        return "search-hashtag";
+    }
+
+    @GetMapping("/form/jsp")
+    public String jspArticleForm(ModelMap map) {
+        map.addAttribute("formStatus", FormStatus.ACREATE);
+
+        return "form";
+    }
+
+    @PostMapping ("/form/jsp")
+    public String jspPostNewArticle(ArticleRequest articleRequest,
+                                 @AuthenticationPrincipal BoardPrincipal boardPrincipal) {
+
+        articleService.saveArticle(articleRequest.toDto(boardPrincipal.toDto()));
+
+        return "redirect:/articles/jsp";
+    }
+
+    @GetMapping("/{articleId}/form/jsp")
+    public String jspUpdateArticleForm(@PathVariable Long articleId, ModelMap map) {
+        ArticleResponse article = ArticleResponse.from(articleService.getArticle(articleId));
+
+        map.addAttribute("article", article);
+        map.addAttribute("formStatus", FormStatus.AUPDATE);
+
+        return "form";
+    }
+
+    @PostMapping ("/{articleId}/form/jsp")
+    public String jspUpdateArticle(@PathVariable Long articleId,
+                                ArticleRequest articleRequest,
+                                @AuthenticationPrincipal BoardPrincipal boardPrincipal) {
+
+        articleService.updateArticle(articleId, articleRequest.toDto(boardPrincipal.toDto()));
+
+        return "redirect:/articles/" + articleId + "/jsp";
+    }
+
+    @PostMapping ("/{articleId}/delete/jsp")
+    public String jspDeleteArticle(
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal) {
+
+        System.out.println("jsp deleteCall");
+        articleService.deleteArticle(articleId, boardPrincipal.getUsername());
+
+        return "redirect:/articles/jsp";
+    }
+
 }

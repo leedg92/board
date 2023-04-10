@@ -71,4 +71,53 @@ public class ArticleCommentController {
 
         return "redirect:/articles/" + articleId + "/th";
     }
+
+    @PostMapping("/new/jsp")
+    public String jspPostNewArticleComment(ArticleCommentRequest articleCommentRequest,
+                                        @AuthenticationPrincipal BoardPrincipal boardPrincipal){
+        System.out.println("new/jsp call");
+        articleCommentService.saveArticleComment(articleCommentRequest.toDto(boardPrincipal.toDto()));
+
+
+        return "redirect:/articles/" + articleCommentRequest.articleId() + "/jsp";
+    }
+
+    @GetMapping("/{articleId}/{commentId}/form/jsp")
+    public String jspUpdateArticleCommentForm(@PathVariable("articleId") Long articleId,
+                                           @PathVariable("commentId") Long commentId,
+                                           ModelMap map) {
+        ArticleCommentResponse articleComment = ArticleCommentResponse.from(articleCommentService.getArticleComment(commentId));
+
+
+        System.out.println("commentId :: " + articleComment.id());
+        System.out.println("articleId ::::::: " + articleId);
+        map.addAttribute("articleComment", articleComment);
+        map.addAttribute("articleId", articleId);
+        map.addAttribute("formStatus", FormStatus.CUPDATE);
+
+        return "commentForm";
+    }
+
+    @PostMapping ("/{articleId}/{commentId}/form/jsp")
+    public String jspUpdateArticleComment(@PathVariable("commentId") Long commentId,
+                                       @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+                                       ArticleCommentRequest articleCommentRequest) {
+
+
+        System.out.println("commentId ::::::: " + commentId);
+        System.out.println("articleId ::::::: " + articleCommentRequest);
+
+        articleCommentService.updateArticleComment(articleCommentRequest.toDto(boardPrincipal.toDto()));
+
+        return "redirect:/articles/" + articleCommentRequest.articleId() + "/jsp";
+    }
+
+    @PostMapping("/{commentId}/delete/jsp")
+    public String jspDeleteArticleComment(@PathVariable Long commentId,
+                                       @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+                                       Long articleId){
+        articleCommentService.deleteArticleComment(commentId, boardPrincipal.getUsername());
+
+        return "redirect:/articles/" + articleId + "/jsp";
+    }
 }
