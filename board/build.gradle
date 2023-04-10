@@ -1,13 +1,15 @@
 plugins {
     id 'java'
+    id 'war'
     id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'war'
+
 }
 
 group = 'com.example'
 version = 'v1.2'
 sourceCompatibility = '17'
+apply plugin: 'war'
 
 configurations {
     compileOnly {
@@ -22,6 +24,10 @@ repositories {
 tasks.jar {
     manifest.attributes["Main-Class"] = "com.example.board.BoardApplication"
     enabled = false
+}
+
+bootWar {
+    enabled= true
 }
 
 
@@ -69,7 +75,7 @@ dependencies {
 //jsp용 의존성 추가
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'javax.servlet:jstl'
-//    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'org.springframework.security:spring-security-taglibs'
     
 }
