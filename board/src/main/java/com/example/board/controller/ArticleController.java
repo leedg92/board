@@ -37,7 +37,7 @@ public class ArticleController {
     ) {
         Page<ArticleResponse> articles = articleService.searchArticles(searchType, searchValue, pageable).map(ArticleResponse::from);
         List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), articles.getTotalPages());
-        System.out.println("SearchType ::::: " + searchType);
+
         map.addAttribute("articles", articles);
         map.addAttribute("paginationBarNumbers", barNumbers);
         map.addAttribute("searchTypes", SearchType.values());
@@ -132,7 +132,7 @@ public class ArticleController {
     ) {
         Page<ArticleResponse> articles = articleService.searchArticles(searchType, searchValue, pageable).map(ArticleResponse::from);
         List<ArticleResponse> articlesList = articles.getContent();
-        System.out.println("aaaaa ::: " + searchType);
+
 
         List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), articles.getTotalPages());
 
