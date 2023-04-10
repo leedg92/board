@@ -39,17 +39,24 @@ public class SecurityConfig {
                         .mvcMatchers(
                                 HttpMethod.GET,
                                 "/",
-                                "/articles",
-                                "/articles/search-hashtag",
-                                "/users/userForm"
+                                "/th",
+                                "/jsp",
+                                "/articles/th",
+                                "/articles/search-hashtag/th",
+                                "/users/userForm/th",
+                                "/articles/jsp",
+                                "/articles/search-hashtag/jsp",
+                                "/users/userForm/jsp"
                         ).permitAll()
                         .mvcMatchers(
                                 HttpMethod.POST,
-                                "/users/userForm"
+                                "/users/userForm/th",
+                                "/users/userForm/jsp"
                         )
                         .permitAll()
                         .anyRequest().authenticated()
                 )
+                .csrf().disable()   //jsp에서 post시 csrf가 났기때문에 일단 비활성화..
                 .formLogin(withDefaults())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))

@@ -4,7 +4,7 @@ package com.example.board.domain.constant;
 import lombok.Getter;
 
 public enum FormStatus {
-    ACREATE("게시글 저장", false),
+    ACREATE("게시글 작성", false),
     AUPDATE("게시글 수정", true),
     CUPDATE("댓글 수정", true);
 

@@ -5,7 +5,7 @@
 
     <attr sel="#article-form-header/h1" th:text="${formStatus} ? ${formStatus.description} : _" />
 
-    <attr sel="#article-form" th:action="${formStatus?.update} ? '/articles/' + ${article.id} + '/form' : '/articles/form'" th:method="post">
+    <attr sel="#article-form" th:action="${formStatus?.update} ? '/articles/' + ${article.id} + '/form/th' : '/articles/form/th'" th:method="post">
         <attr sel="#title" th:value="${article?.title} ?: _" />
         <attr sel="#content" th:text="${article?.content} ?: _" />
 <!--        <attr sel="#hashtag" th:value="${article?.hashtag} ?: _" />-->
