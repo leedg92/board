@@ -66,6 +66,13 @@ spring:
             user-name-attribute: id
 
 
+  mvc:
+    view:
+#    prefix: /WEB-INF/
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+
 
 
 
