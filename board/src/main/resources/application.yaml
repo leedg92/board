@@ -66,9 +66,16 @@ spring:
             user-name-attribute: id
 
 
+  ##jsp와 thymeleaf를 구분
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    view-names: articles/*
+
+
   mvc:
     view:
-#    prefix: /WEB-INF/
       prefix: /WEB-INF/views/
       suffix: .jsp
 
