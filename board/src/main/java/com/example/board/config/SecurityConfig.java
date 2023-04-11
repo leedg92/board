@@ -46,7 +46,8 @@ public class SecurityConfig {
                                 "/users/userForm/th",
                                 "/articles/jsp",
                                 "/articles/search-hashtag/jsp",
-                                "/users/userForm/jsp"
+                                "/users/userForm/jsp",
+                                "/users/isExistedUser"
                         ).permitAll()
                         .mvcMatchers(
                                 HttpMethod.POST,
@@ -74,7 +75,7 @@ public class SecurityConfig {
         return username -> userAccountService
                 .searchUser(username)
                 .map(BoardPrincipal::from)
-                .orElseThrow(() -> new UsernameNotFoundException("유저를 찾을 수 없습니다 - username"));
+                .orElseThrow(() -> new UsernameNotFoundException("유저를 찾을 수 없습니다"));
 
     }
 

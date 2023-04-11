@@ -24,7 +24,7 @@
 
   <form id="user-form">
     <label for="userId">Username:</label>
-    <input type="text" id="userId" name="userId"><br><br>
+    <input type="text" id="userId" name="userId"> <button type="button" id="idDupCheck">중복검사</button><br><br>
 
     <label for="userPassword">Password:</label>
     <input type="password" id="userPassword" name="userPassword"><br><br>
@@ -58,6 +58,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
   function Validate() {
     var p1 = document.getElementById('password').value;
@@ -78,6 +79,29 @@
     }
 
   }
+
+  $('#idDupCheck').click(function(){
+    // alert($('#userId').val());
+    var paramId = $('userId').val();
+    if(!paramId){
+      alert("아이디를 입력해주세요.");
+      return false;
+    }
+    $.ajax({
+      url : "/users/isExistedUser?paramId="+paramId,
+      type: "GET",
+      contentType: "application/json;charset=UTF-8",
+      success : function (data){
+        if(data == true){
+          alert("이미 존재하는 아이디입니다. 다른 아이디 입력해주세요.");
+          $('#userId').val("")
+        }else{
+          alert("가입 가능한 아이디입니다");
+        }
+      }
+    })
+  });
+
 </script>
 </body>
 </html>

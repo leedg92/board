@@ -10,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -43,6 +43,17 @@ public class UserAccountController {
         //TODO : 화면단에 alert 띄우는 것 까지 나중에 구현하기(안해도되나..?)
 
         return "redirect:/articles/th";
+    }
+
+    @GetMapping("/isExistedUser")
+    @ResponseBody
+    public boolean searchUser(
+            @RequestParam("paramId") String paramId
+    ){
+        System.out.println("paramId :: " + paramId);
+        Optional<UserAccountDto> dupCheckResult = userAccountService.searchUser(paramId);
+        System.out.println("dupCheckResult :: " + dupCheckResult);
+        return dupCheckResult.isPresent() ? true : false;
     }
 
 
